@@ -27,14 +27,15 @@ To handle high data volumes efficiently within Excel's ecosystem, a robust Extra
 ### Key Power Query Implementations:
 1. **Extraction:** Connected directly to large-scale operational flat files, shifting processing overhead from Excel’s grid engine to the underlying Power Query mashup engine.
 2. **M-Code Global Currency Standardization:** To eliminate fragmentation from multi-currency entries, a conditional logic block was executed to normalize BDT, INR, and EUR entries into USD based on current spot conversion attributes:
+
 ```powerquery
-Conceptual M-Code snippet used for currency normalization
-    = Table.AddColumn(#"Changed Type", "Total Amount USD", each 
-        if [Currency] = "BDT" then [Amount] / [USD Convert Rate]
-        else if [Currency] = "INR" then [Amount] / [USD Convert Rate]
-        else if [Currency] = "EUR" then [Amount] * [USD Convert Rate]
-        else [Amount], type number)
-    ```
+// Conceptual M-Code snippet used for currency normalization
+= Table.AddColumn(#"Changed Type", "Total Amount USD", each 
+    if [Currency] = "BDT" then [Amount] / [USD Convert Rate]
+    else if [Currency] = "INR" then [Amount] / [USD Convert Rate]
+    else if [Currency] = "EUR" then [Amount] * [USD Convert Rate]
+    else [Amount], type number)
+```
 
 ---
 
@@ -88,6 +89,8 @@ To optimize memory utilization and maximize dashboard responsiveness, data model
 │ PK  Supplier_ID         │               │ PK  Time_Key            │
 │     Reliability_Score   │               │      Season / Quarter   │
 └─────────────────────────┘               └─────────────────────────┘
+```
+
 * **In-Memory Pivot Cache Compression:** Avoided duplicating dimensional data across 200,000 rows. Instead, data was loaded directly into the optimized in-memory cache, drastically shrinking file size and shortening refresh intervals from minutes to seconds.
 * **Granular Table Segmentation:** Separated structural fields into logical groups. High-frequency updates remain inside the central Transaction Fact table, while descriptive dimensions reside in separate logical contexts to prevent structural data redundancy.
 
@@ -102,8 +105,10 @@ The backend analytical calculation engine leverages a combination of Pivot Table
 $$\text{Net Profit Margin (\%)} = \left( \frac{\text{Net Profit Margin USD}}{\text{Total Amount USD}} \right) \times 100$$
 
 * **Dynamic Inventory Risk Formula:** Implemented contextual array scanning using `XLOOKUP` and complex multi-criteria filters (`SUMIFS`) to determine supply chain vulnerabilities:
+```excel
 =SUMIFS(Fact_Sales[Quantity], Fact_Sales[Warehouse Location], [@Location], Fact_Sales[Is Holiday / Event], 1)
-    ```
+```
+
 * **Multi-Criteria Inventory Categorization:** Evaluated safety stock tolerances dynamically:
     $$\text{Inventory Risk Stock State} = \text{IF}(\text{Stock Level} \le \text{Safety Stock Level}, \text{"Critical Action Required"}, \text{"Optimized"})$$
 
@@ -158,8 +163,8 @@ Follow these steps to run this analytics platform locally on your machine:
 
 1. **Clone the Repository:**
 ```bash
-    git clone [https://github.com/mdsalauddin-lab/sme-operations-performance-analytics.git](https://github.com/mdsalauddin-lab/sme-operations-performance-analytics.git)
-    ```
+git clone [https://github.com/mdsalauddin-lab/sme-operations-performance-analytics.git](https://github.com/mdsalauddin-lab/sme-operations-performance-analytics.git)
+```
 2. **Open the Application File:** Navigate to the `/01_Dashboard_Application` directory and open `SME_Operations_Dashboard.xlsx` using Microsoft Excel (Excel 2021 or Microsoft 365 recommended for full dynamic array compatibility).
 3. **Enable External Connections:** If prompted by Excel's security bar, click **"Enable Editing"** and **"Enable Content"** to allow the underlying Power Query data links to spin up.
 4. **Interact with the Dashboard:** Use the slicers on the left panel to filter the views. To update the underlying data source, go to the **Data** tab on the top ribbon and click **Refresh All**.
