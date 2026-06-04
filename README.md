@@ -151,7 +151,7 @@ Processing over **200,000 rows** in Excel requires deliberate performance engine
 
 ## 9. Project Structure & Deliverables
 
-* **`/01_Dashboard_Application`**: Contains the core interactive Excel workbook (`SME_Operations_Dashboard.xlsx`).
+* **`/01_Dashboard_Application`**: Contains the core interactive Excel workbook (`SME_Operations_Dashboard.jpg`).
 * **`/02_Raw_Data`**: Contains sample source transaction data logs used for the Power Query ETL pipeline.
 * **`/03_Documentation`**: Project architecture brief and KPI data dictionaries.
 
