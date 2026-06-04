@@ -28,7 +28,7 @@ To handle high data volumes efficiently within Excel's ecosystem, a robust Extra
 1. **Extraction:** Connected directly to large-scale operational flat files, shifting processing overhead from Excel’s grid engine to the underlying Power Query mashup engine.
 2. **M-Code Global Currency Standardization:** To eliminate fragmentation from multi-currency entries, a conditional logic block was executed to normalize BDT, INR, and EUR entries into USD based on current spot conversion attributes:
 ```powerquery
-    // Conceptual M-Code snippet used for currency normalization
+Conceptual M-Code snippet used for currency normalization
     = Table.AddColumn(#"Changed Type", "Total Amount USD", each 
         if [Currency] = "BDT" then [Amount] / [USD Convert Rate]
         else if [Currency] = "INR" then [Amount] / [USD Convert Rate]
