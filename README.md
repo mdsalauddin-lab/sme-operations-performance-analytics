@@ -362,35 +362,35 @@ SME-Operations-Dashboard/
 
 ## 14. Interview Readiness & Technical Q&A Hooks
 
-## 🎯 Hook 1: Currency Normalization in Power Query
+### Hook 1: Currency Normalization in Power Query
 **Q:** *"How did you handle multi-currency fragmentation across BDT, INR, and EUR without losing precision?"*
 
 **A:** Built conditional M-code that applies spot rate conversions before the VertiPaq engine. BDT and INR are divided by monthly average rates; EUR is multiplied (premium currency). Added validation step filtering out negative/zero conversions with logging to error table.
 
 ---
 
-## 🎯 Hook 2: Memory Optimization via "Load to Model Only"
+### Hook 2: Memory Optimization via "Load to Model Only"
 **Q:** *"How did you prevent Excel from crashing with 200,000+ rows?"*
 
 **A:** Never loaded raw tables to worksheets. Pushed everything into Power Pivot's columnar cache, compressing storage by ~80% (25MB worksheet → 5MB model). Disabled background refresh to avoid race conditions. Replaced volatile OFFSET/INDIRECT with structured INDEX/MATCH.
 
 ---
 
-## 🎯 Hook 3: Delivery Delay Anomaly Detection
+### Hook 3: Delivery Delay Anomaly Detection
 **Q:** *"How did you validate logistics timeline integrity?"*
 
 **A:** Built calculated column `Delivery Delay = Delivery Date - Shipping Date`. Flagged negative values (impossible: delivered before shipped) and outliers >365 days. Excluded holiday periods from SLA calculations but retained for capacity planning.
 
 ---
 
-## 🎯 Hook 4: DAX Measures vs. Worksheet Formulas
+### Hook 4: DAX Measures vs. Worksheet Formulas
 **Q:** *"Why didn't you just use SUMIFS in the grid?"*
 
 **A:** SUMIFS recalculates every time any cell changes—kills performance. DAX measures in Power Pivot pre-aggregate at query time only, leveraging VertiPaq compression. Result: slicer interactions in <2 seconds instead of 30 seconds of "Not Responding."
 
 ---
 
-## 🎯 Hook 5: Business Impact Storytelling
+### Hook 5: Business Impact Storytelling
 **Q:** *"What actionable insight did this dashboard actually produce?"*
 
 **A:** The beauty category had the highest sales ($36.3M) but lowest net margin due to 47-day warehousing in South region vs. 22-day Central. Rebalanced inventory → recovered 14.2% margin. Also redirected $120K from low-CAC paid social (0.09% margin) to organic SEO (0.22% margin) based on sentiment correlation (r=0.67).
