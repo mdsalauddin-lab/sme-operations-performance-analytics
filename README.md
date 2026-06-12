@@ -5,9 +5,6 @@
 ![Power Pivot](https://img.shields.io/badge/Power_Pivot-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 ![DAX](https://img.shields.io/badge/DAX-2C2C2C?style=for-the-badge&logo=powerbi&logoColor=white)
 ![M Language](https://img.shields.io/badge/M_Language-008080?style=for-the-badge&logo=powerbi&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
 ## 1. Executive Summary & Business Context
 
